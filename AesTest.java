@@ -1,5 +1,3 @@
-package AesTest;
-
 import javax.crypto.Cipher;
 import java.security.AlgorithmParameters;
 import javax.crypto.spec.SecretKeySpec;

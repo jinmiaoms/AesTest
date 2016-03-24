@@ -40,8 +40,22 @@ public class AesTest
         byte [] key="1111111111111111".getBytes("UTF-8");
         byte[] data = "this is a test".getBytes("UTF-8");
         AesTest at = new AesTest();
+
+	long x = System.nanoTime();
+        for (int i = 0; i < 1000; i++) {
+            try {
+                byte[] encData = at.enc(data, key);
+                at.dec(encData, key);
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+                throw ex;
+            }
+        }
+	System.out.println(System.nanoTime() - x);
+	System.out.println("Finish warmup");
+
         for (int i = 0; i < numIt; i++) {
-            long x = System.nanoTime();
+            x = System.nanoTime();
             try {
                 byte[] encData = at.enc(data, key);
                 at.dec(encData, key);
@@ -50,7 +64,6 @@ public class AesTest
                 throw ex;
             }
             System.out.println(System.nanoTime() - x);
-            //System.in.read();
-        }
+       }
     }
 }
